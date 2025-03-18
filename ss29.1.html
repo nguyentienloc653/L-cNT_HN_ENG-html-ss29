@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      let Contacts = [
+        {
+          id: 1,
+          name: "Ưng Hoàng Phú",
+          email: "hoangphuc@gmail.com",
+          phone: "0123456789",
+        },
+
+        {
+          id: 2,
+          name: "Soo Bin",
+          email: "binbin@gmail.com",
+          phone: "0537287239",
+        },
+      ];
+      // thêm
+      function addContact() {
+        let id = +prompt("Nhập vào ID bạn muốn");
+        let name = prompt("Nhập vào tên của người liên hệ");
+        let email = prompt("Nhập vào email của người liên hệ");
+        let phone = prompt("Nhập vào số điện thoại của người liên hệ");
+
+        let newContact = {
+          id: id,
+          name: name,
+          email: email,
+          phone: phone,
+        };
+
+        Contacts.push(newContact);
+        console.log(`Đã thêm liên hệ mới`);
+      }
+
+      // hiển thị
+      function display() {
+        console.log("Danh sách danh bạ:");
+        Contacts.forEach((contacts) => {
+          console.log(`
+            ID: ${contacts.id} ,
+            Tên: ${contacts.name},
+            Email: ${contacts.email},
+            SĐT: ${contacts.phone}`);
+        });
+      }
+
+      // tìm kiếm
+      function search() {
+        let searchPhone = prompt("Nhập số điện thoại bạn muốn tìm kiếm");
+        Contacts.forEach((contacts) => {
+          if (contacts.phone === searchPhone) {
+            console.log(`
+            ID: ${contacts.id}
+            Tên: ${contacts.name},
+            Email: ${contacts.email},
+            SĐT: ${contacts.phone}
+            `);
+          }
+        });
+      }
+
+      // cập nhật theo id
+      function updateContact() {
+        let searchId = +prompt("Nhập vào ID mà bạn muốn tìm kiếm");
+        Contacts.forEach((contacts) => {
+          if (contacts.id === searchId) {
+            let name = prompt("Nhập vào tên của người liên hệ");
+            let email = prompt("Nhập vào email của người liên hệ");
+            let phone = prompt("Nhập vào số điện thoại của người liên hệ");
+
+            contacts.name = name;
+            contacts.email = email;
+            contacts.phone = phone;
+          }
+        });
+      }
+
+      //xóa
+      function deleteContact() {
+        let searchID = +prompt("Nhập vào ID mà bạn muốn xóa :");
+        let index = Contacts.findIndex((contact) => contact.id === searchID);
+
+        if (index !== -1) {
+          Contacts.splice(index, 1);
+          console.log("Xóa thành công");
+        } else {
+          console.log("không tìm thấy ID");
+        }
+      }
+      do {
+        console.log(`1.Thêm đối tương Contact vào danh sách liên hệ`);
+        console.log(`2.Hiện thị danh sách danh bạ`);
+        console.log(`3.Tìm kiếm thông tin Contact theo số điện thoại`);
+        console.log(`4.Cập nhật thông tin Contac(name,email,phone) theo id`);
+        console.log(
+          `5.Xóa một đối tượng Contact khỏi danh sách danh bạ theo id.`
+        );
+        console.log(`6.Thoát.`);
+        choice = +prompt("Lụa chọn của bạn");
+        switch (choice) {
+          case 1:
+            addContact();
+            break;
+          case 2:
+            display();
+            break;
+          case 3:
+            search();
+            break;
+          case 4:
+            updateContact();
+            break;
+          case 5:
+            deleteContact();
+            break;
+          case 6:
+            break;
+        }
+      } while (choice !== 6);
+    </script>
+  </body>
+</html>
